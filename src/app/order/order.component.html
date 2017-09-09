@@ -47,50 +47,12 @@
         <div class="col-xs-12">
           <p class="lead">Itens do Pedido:</p>
         </div>
-        <div class="col-xs-12 table-responsive">
 
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th class="text-center">Quantidade</th>
-                <th>Item</th>
-                <th>Descrição</th>
-                <th class="text-right">Subtotal</th>
-                <th class="text-right"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="text-center">
-                  <a class="btn btn-sm"><i class="fa fa-minus"></i></a> 1
-                  <a class="btn btn-sm"><i class="fa fa-plus"></i></a>
-                </td>
-                <td>Cup Cake</td>
+        <mt-order-items
+          [items]="cartItens()"
+          (increaseQty)="increaseQty($event)"
+          (decreaseQty)="decreaseQty($event)"></mt-order-items>
 
-                <td>Recheado com doce de leite</td>
-                <td class="text-right">R$ 10,00</td>
-                <td class="text-right">
-                  <a class="btn btn-sm danger"><i class="fa fa-remove"></i></a>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-center">
-                  <a class="btn btn-sm"><i class="fa fa-minus"></i></a> 1
-                  <a class="btn btn-sm"><i class="fa fa-plus"></i></a>
-                </td>
-                <td>Croissant</td>
-
-                <td>Recheado com presunto e queijo</td>
-                <td class="text-right">R$ 10,00</td>
-                <td class="text-right">
-                  <a class="btn btn-sm danger "><i class="fa fa-remove"></i></a>
-                </td>
-              </tr>
-
-            </tbody>
-          </table>
-        </div>
-        <!-- /.col -->
       </div>
       <!-- /.row -->
 
@@ -100,27 +62,7 @@
           <p class="lead">Formas de Pagamento:</p>
 
           <div class="form-group">
-            <div>
-              <label>
-                         <div class="iradio_flat-red checked" aria-checked="false" aria-disabled="false"
-                             style="position: relative;">
-                             <input type="radio" name="r3" class="flat-red" checked="" style="position: absolute; opacity: 0;"/>
-                             <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                         </div>
-                         Dinheiro
-                       </label>
-            </div>
-            <div>
-              <label>
-                        <div class="iradio_flat-red" aria-checked="false" aria-disabled="false"
-                            style="position: relative;">
-                            <input type="radio" name="r3" class="flat-red" checked="" style="position: absolute; opacity: 0;"/>
-                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                        </div>
-                        Cartão de Débito
-                      </label>
-            </div>
-
+            <mt-radio [options]="paymentOptions" name="paymentOption" ngModel ></mt-radio>
           </div>
 
         </div>
