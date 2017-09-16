@@ -370,5 +370,81 @@
       "restaurantId": "tasty-treats"
     }
   ],
-  "orders": []
+  "orders": [
+    {
+      "address": "Rua Flora",
+      "number": "1170",
+      "optionalAddress": "123",
+      "paymentOption": "DEB",
+      "orderItems": [
+        {
+          "quantity": 1,
+          "menuId": "espreso"
+        },
+        {
+          "quantity": 1,
+          "menuId": "starb"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "address": "Av Flora",
+      "number": "1170",
+      "optionalAddress": "Ap134",
+      "paymentOption": "DEB",
+      "orderItems": [
+        {
+          "quantity": 2,
+          "menuId": "donut"
+        },
+        {
+          "quantity": 4,
+          "menuId": "bread"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "address": "Rua Paranaense",
+      "number": "425",
+      "optionalAddress": "",
+      "paymentOption": "DEB",
+      "orderItems": [
+        {
+          "quantity": 2,
+          "menuId": "burger"
+        },
+        {
+          "quantity": 2,
+          "menuId": "fries"
+        },
+        {
+          "quantity": 1,
+          "menuId": "coke.png"
+        }
+      ],
+      "id": 3
+    },
+    {
+      "name": "Douglas",
+      "email": "dou@teste.com",
+      "emailConfirmation": "fdd@teste.com",
+      "address": "Rua do Teste",
+      "number": "123",
+      "optionalAddress": "",
+      "paymentOption": "DEB",
+      "orderItems": [
+        {
+          "quantity": 1,
+          "menuId": "capp"
+        },
+        {
+          "quantity": 1,
+          "menuId": "espreso"
+        }
+      ],
+      "id": 4
+    }
+  ]
 }

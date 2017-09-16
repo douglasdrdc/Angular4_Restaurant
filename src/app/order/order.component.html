@@ -4,9 +4,8 @@
 <section class="content">
   <section class="invoice">
 
-    {{form.valid}} {{form.value | json}}
+    <form [formGroup]="orderForm" novalidate>
 
-    <form #form="ngForm" novalidate>
       <div class="row">
         <div class="col-xs-12">
           <h2 class="page-header">
@@ -15,34 +14,61 @@
         </div>
       </div>
 
-      <div class="row invoice-info">
+      <!-- Dados Pessoais -->
+      <div class="row">
+        <div class="col-xs-12 col-sm-9">
+          <p class="lead">Seus Dados:</p>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+          <span class="help-block pull-right has-error-block" *ngIf="orderForm.hasError('emailsNotMatch')"><i class="fa fa-remove"></i> E-mails não coferem </span>
+        </div>
+
+
+        <div class="col-sm-6 col-xs-12">
+            <mt-input-container errorMessage="Campo obrigatório e com 5 carcteres" label="Nome">
+              <input formControlName="name" class="form-control" autocomplete="off" placeholder="Nome" >
+            </mt-input-container>
+        </div>
+        <div class="col-sm-3 col-xs-6">
+            <mt-input-container errorMessage="E-mail inválido" label="E-mail">
+                <input formControlName="email" class="form-control" autocomplete="off" placeholder="E-mail" >
+            </mt-input-container>
+        </div>
+        <div class="col-sm-3 col-xs-6">
+            <mt-input-container errorMessage="E-mail diferente" label="Confirmação de E-mail">
+                <input formControlName="emailConfirmation" class="form-control" autocomplete="off" placeholder="Confirmação de E-mail" >
+            </mt-input-container>
+        </div>
+      </div>
+
+      <!-- Dados para entrega -->
+      <div class="row">
         <div class="col-xs-12">
           <p class="lead">Endereço de Entrega:</p>
         </div>
         <div class="col-sm-6 col-xs-12">
 
           <mt-input-container errorMessage="Campo obrigatório e com 5 carcteres" label="Endereço">
-            <input name="address" class="form-control" ngModel required minlength="5" autocomplete="off" placeholder="Endereço" >
+            <input formControlName="address" class="form-control" autocomplete="off" placeholder="Endereço" >
           </mt-input-container>
 
         </div>
         <div class="col-sm-3 col-xs-6">
 
             <mt-input-container errorMessage="Campo obrigatório e somente números" label="Número">
-                <input name="number" class="form-control" ngModel required minlength="1" autocomplete="off" placeholder="Número"
-                  pattern="^[0-9]*$">
+                <input formControlName="number" class="form-control" autocomplete="off" placeholder="Número" >
             </mt-input-container>
 
         </div>
         <div class="col-sm-3 col-xs-6">
             <mt-input-container errorMessage="" label="Complemento">
-                <input name="optional" class="form-control" ngModel autocomplete="off" placeholder="Complemento">
+                <input formControlName="optionalAddress" class="form-control" autocomplete="off" placeholder="Complemento">
             </mt-input-container>
 
           </div>
       </div>
 
-      <!-- Table row -->
+      <!-- Lista de Itens do Pedido -->
       <div class="row">
         <div class="col-xs-12">
           <p class="lead">Itens do Pedido:</p>
@@ -54,50 +80,37 @@
           (decreaseQty)="decreaseQty($event)"></mt-order-items>
 
       </div>
-      <!-- /.row -->
 
       <div class="row">
-        <!-- accepted payments column -->
+
+        <!-- Formas de Pagamento -->
         <div class="col-sm-6 col-xs-12">
           <p class="lead">Formas de Pagamento:</p>
 
           <div class="form-group">
-            <mt-radio [options]="paymentOptions" name="paymentOption" ngModel ></mt-radio>
+            <mt-radio [options]="paymentOptions" formControlName="paymentOption" ></mt-radio>
           </div>
 
         </div>
-        <!-- /.col -->
+
+        <!-- Frete e Total -->
         <div class="col-sm-6 col-xs-12">
           <p class="lead">Frete e Total:</p>
 
-          <div class="table-responsive">
-            <table class="table">
-              <tbody>
-                <tr>
-                  <th style="width:50%">Itens:</th>
-                  <td class="text-right">R$ 20,00</td>
-                </tr>
-                <tr>
-                  <th>Frete:</th>
-                  <td class="text-right">R$ 8,00</td>
-                </tr>
-                <tr>
-                  <th>Total:</th>
-                  <td class="text-right">R$ 28,00</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <mt-delivery-costs [delivery]="delivery" [itemsValue]="itemsValue()" ></mt-delivery-costs>
+
         </div>
-        <!-- /.col -->
+
       </div>
 
     </form>
 
     <div class="row">
       <div class="col-xs-12">
-        <button class="btn btn-success pull-right" [disabled]="!form.valid">
-          <i class="fa fa-credit-card"></i> Concluir Pedido
+        <button class="btn btn-success pull-right"
+          (click)="checkOrder(orderForm.value)"
+          [disabled]="!orderForm.valid || cartItens().length === 0">
+            <i class="fa fa-credit-card"></i> Concluir Pedido
         </button>
       </div>
     </div>
