@@ -1,5 +1,7 @@
-<div class="menu-item-info-box">
-  <span class="menu-item-info-box-icon"><img [src]="menuItem.imagePath"></span>
+<div class="menu-item-info-box" [@menuItemAppeared]="menuItemState">
+  <span class="menu-item-info-box-icon">
+    <img [src]="menuItem.imagePath">
+  </span>
 
   <div class="menu-item-info-box-content">
     <span class="menu-item-info-box-text">{{menuItem.name}}</span>
