@@ -1,3 +1,4 @@
+import { NotFoundComponent } from './not-found/not-found.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { ReviewsComponent } from './restaurant-datail/reviews/reviews.component';
 import { MenuComponent } from './restaurant-datail/menu/menu.component';
@@ -9,7 +10,7 @@ import { RestaurantDatailComponent } from './restaurant-datail/restaurant-datail
 
 export const ROUTES: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'restaurants', component: RestaurantsComponent},
+
   {path: 'restaurants/:id', component: RestaurantDatailComponent,
     children: [
       {path: '', redirectTo: 'menu', pathMatch: 'full'},
@@ -17,8 +18,10 @@ export const ROUTES: Routes = [
       {path: 'reviews', component: ReviewsComponent}
     ]
   },
+  {path: 'restaurants', component: RestaurantsComponent},
   {path: 'order-summary', component: OrderSummaryComponent},
   {path: 'about', loadChildren: './about/about.module#AboutModule'},
-  {path: 'order', loadChildren: './order/order.module#OrderModule'}
+  {path: 'order', loadChildren: './order/order.module#OrderModule'},
+  {path: '**', component: NotFoundComponent }
 
 ];

@@ -32,7 +32,7 @@ export class ShoppingCartComponent implements OnInit {
   ngOnInit() {
   }
 
-  items(): any[] {
+  items(): CartItem[] {
     return this.shoppingCartService.items;
   }
 
